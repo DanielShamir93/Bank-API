@@ -16,13 +16,13 @@ const toWithdraw = (req, res) => {
 
         if (usersObject.hasOwnProperty(id)) {
 
-          if (+usersObject[id].credit + +usersObject[id].cash >= amount) {
+          if (+usersObject[id].credit + +usersObject[id].cash >= +amount) {
             // User has enough money in the bank to withdraw
-            if (+usersObject[id].cash >= amount) {
+            if (+usersObject[id].cash >= +amount) {
               // User has enough cash to withdraw
-              usersObject[id].cash -= amount;
+              usersObject[id].cash -= +amount;
             } else {
-              // User needs credit to withdraw
+              // User needs to use credit to withdraw
               usersObject[id].credit += +usersObject[id].cash;
               usersObject[id].credit -= +amount;
               usersObject[id].cash = 0;
