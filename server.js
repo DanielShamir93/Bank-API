@@ -9,4 +9,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/users', usersRoutes);
 
+// 404
+app.get("/*", (req, res) => {res.status(404).send('404')});
+app.post("/*", (req, res) => {res.status(404).send('404')});
+app.put("/*", (req, res) => {res.status(404).send('404')});
+
 app.listen(PORT, () => console.log(`Server is running at ${PORT}`));

@@ -3,9 +3,9 @@ const path = require("path");
 const dbPath = path.join(__dirname, "../../../db", "db.json");
 
 const makeDeposit = (req, res) => {
-  if (req.body.hasOwnProperty("deposit")) {
-    const { deposit } = req.body;
-    if (+deposit > 0) {
+  if (req.body.hasOwnProperty("amount")) {
+    const { amount } = req.body;
+    if (+amount > 0) {
       fs.readFile(dbPath, "utf8", (err, data) => {
         if (err) {
           res.send(err.message);
@@ -15,7 +15,7 @@ const makeDeposit = (req, res) => {
         const { id } = req.params;
 
         if (usersObject.hasOwnProperty(id)) {
-          usersObject[id].cash += +deposit;
+          usersObject[id].cash += +amount;
           fs.writeFile(dbPath, JSON.stringify(dataObject), (err) => {
             if (err) {
               res.send(err.message);
@@ -27,10 +27,10 @@ const makeDeposit = (req, res) => {
         }
       });
     } else {
-      res.send('Deposit must be positive.');
+      res.send('Deposit amount must be positive.');
     }
   } else {
-    res.send('No deposit was made.');
+    res.send('No deposit amount was made.');
   }
 };
 

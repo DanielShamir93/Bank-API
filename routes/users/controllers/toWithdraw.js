@@ -15,7 +15,6 @@ const toWithdraw = (req, res) => {
         const { id } = req.params;
 
         if (usersObject.hasOwnProperty(id)) {
-
           if (+usersObject[id].credit + +usersObject[id].cash >= +amount) {
             // User has enough money in the bank to withdraw
             if (+usersObject[id].cash >= +amount) {
@@ -35,7 +34,9 @@ const toWithdraw = (req, res) => {
               res.send(usersObject[id]);
             });
           } else {
-            res.send(`User does not have enough money in the bank to withdraw ${amount}$.\nAccount status: cash: ${usersObject[id].cash}$, credit: ${usersObject[id].credit}$`);
+            res.send(
+              `User does not have enough money in the bank to withdraw ${amount}$.\nAccount status: cash: ${usersObject[id].cash}$, credit: ${usersObject[id].credit}$`
+            );
           }
         } else {
           res.send(`There is no user with id: ${id}.`);

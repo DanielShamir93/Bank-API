@@ -3,9 +3,9 @@ const path = require("path");
 const dbPath = path.join(__dirname, "../../../db", "db.json");
 
 const updateUserCredit = (req, res) => {
-  if (req.body.hasOwnProperty("credit")) {
-    const { credit } = req.body;
-    if (+credit > 0) {
+  if (req.body.hasOwnProperty("amount")) {
+    const { amount } = req.body;
+    if (+amount > 0) {
       fs.readFile(dbPath, "utf8", (err, data) => {
         if (err) {
           res.send(err.message);
@@ -15,7 +15,7 @@ const updateUserCredit = (req, res) => {
         const { id } = req.params;
 
         if (usersObject.hasOwnProperty(id)) {
-          usersObject[id].credit = +credit;
+          usersObject[id].credit = +amount;
           fs.writeFile(dbPath, JSON.stringify(dataObject), (err) => {
             if (err) {
               res.send(err.message);
@@ -27,10 +27,10 @@ const updateUserCredit = (req, res) => {
         }
       });
     } else {
-      res.send("Credit must be positive.");
+      res.send("Credit amount must be positive.");
     }
   } else {
-    res.send("No credit was sent.");
+    res.send("No credit amount was sent.");
   }
 };
 
