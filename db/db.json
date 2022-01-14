@@ -1,1 +1,12 @@
-{"users":{"1":{"cash":0,"credit":0},"2":{"cash":0,"credit":0},"3":{"cash":0,"credit":0},"4":{"cash":0,"credit":0},"5":{"cash":100,"credit":500},"6":{"cash":20,"credit":50},"7":{"cash":830,"credit":50},"8":{"cash":20,"credit":50}}}
+{
+  "users": {
+    "1": { "cash": 400, "credit": 100 },
+    "2": { "cash": 0, "credit": 0 },
+    "3": { "cash": 0, "credit": 0 },
+    "4": { "cash": 0, "credit": 0 },
+    "5": { "cash": 100, "credit": 500 },
+    "6": { "cash": 20, "credit": 50 },
+    "7": { "cash": 830, "credit": 50 },
+    "8": { "cash": 20, "credit": 50 }
+  }
+}
