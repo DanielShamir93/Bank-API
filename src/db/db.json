@@ -1,0 +1,12 @@
+{
+  "users": {
+    "1": { "cash": 0, "credit": 94 },
+    "2": { "cash": 602, "credit": 0 },
+    "3": { "cash": 0, "credit": 0 },
+    "4": { "cash": 0, "credit": 0 },
+    "5": { "cash": 0, "credit": 0 },
+    "6": { "cash": 20, "credit": 50 },
+    "7": { "cash": 830, "credit": 50 },
+    "8": { "cash": 20, "credit": 50 }
+  }
+}
