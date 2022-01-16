@@ -2,7 +2,7 @@
   "name": "bank-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon src/server"
   },
@@ -18,9 +18,8 @@
   },
   "homepage": "https://github.com/DanielShamir93/Bank-API#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.2",
-    "netlify-lambda": "^2.0.15",
-    "serverless-http": "^2.7.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
