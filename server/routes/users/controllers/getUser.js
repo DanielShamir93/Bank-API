@@ -1,17 +1,17 @@
-const fs = require("fs");
-const path = require("path");
-const dbPath = path.join(__dirname, "../../../db", "db.json");
+const User = require("../../../mongo/models/userModel");
 
 const getUser = (req, res) => {
-  fs.readFile(dbPath, "utf8", (err, data) => {
-    if (err) {
-      res.send(err.message);
-    }
-    const dataObject = JSON.parse(data);
+  try {
     const { id } = req.params;
-
-    res.send(dataObject.users[id]);
-  });
+    User.findById(id, (err, doc) => {
+      if (err) {
+        console.log(err);
+      }
+      res.json(doc);
+    });
+  } catch (err) {
+    res.send(err.message);
+  }
 };
 
 module.exports = getUser;

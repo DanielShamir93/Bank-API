@@ -1,14 +1,12 @@
-const fs = require("fs");
-const path = require("path");
-const dbPath = path.join(__dirname, "../../../db", "db.json");
+const User = require("../../../mongo/models/userModel");
 
-const getAllUsers = (req, res) => {
-  fs.readFile(dbPath, "utf8", (err, data) => {
-    if (err) {
-      res.send(err.message);
-    }
-    res.send(JSON.parse(data));
-  });
-}
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (err) {
+    res.send(err.message);
+  }
+};
 
 module.exports = getAllUsers;
