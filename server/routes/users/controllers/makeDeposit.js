@@ -1,36 +1,25 @@
-const fs = require("fs");
-const path = require("path");
-const dbPath = path.join(__dirname, "../../../db", "db.json");
+const User = require("../../../mongo/models/userModel");
 
-const makeDeposit = (req, res) => {
-  if (req.body.hasOwnProperty("amount")) {
-    const { amount } = req.body;
-    if (+amount > 0) {
-      fs.readFile(dbPath, "utf8", (err, data) => {
-        if (err) {
-          res.send(err.message);
-        }
-        const dataObject = JSON.parse(data);
-        const usersObject = dataObject.users;
-        const { id } = req.params;
+const makeDeposit = async (req, res) => {
+  try {
+    if (req.body.hasOwnProperty("amount")) {
+      const { amount } = req.body;
+      const { id } = req.params;
 
-        if (usersObject.hasOwnProperty(id)) {
-          usersObject[id].cash += +amount;
-          fs.writeFile(dbPath, JSON.stringify(dataObject), (err) => {
-            if (err) {
-              res.send(err.message);
-            }
-            res.send(usersObject[id]);
-          });
-        } else {
-          res.send(`There is no user with id: ${id}.`);
-        }
-      });
-    } else {
-      res.send('Deposit amount must be positive.');
+      if (+amount > 0) {
+        const prevData = await User.findById(id).select("cash");
+        const updatedCash = prevData.cash + +amount;
+        const updatedDoc = await User.findByIdAndUpdate(id, {
+          cash: updatedCash,
+        });
+
+        res.send(`user: ${id} updated.\ncash = ${updatedDoc.cash}`);
+      } else {
+        res.send("Amount must be positive.");
+      }
     }
-  } else {
-    res.send('No deposit amount was made.');
+  } catch (err) {
+    res.send(err.message);
   }
 };
 

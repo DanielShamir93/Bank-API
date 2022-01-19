@@ -5,7 +5,7 @@ const addUser = async (req, res) => {
     const { cash, credit } = req.body;
     const newUser = { cash, credit };
     const user = await User.create(newUser);
-    console.log(user);
+    res.json(user);
   } catch (err) {
     console.log(err.message);
   }
