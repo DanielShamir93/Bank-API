@@ -9,8 +9,8 @@ function App() {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const { data } = await axios.get('http://localhost:3500/users/all');
-        setUsers(data.users);
+        const { data } = await axios.get('http://localhost:5000/users/all');
+        setUsers(data);
       } catch (err) {
         console.log(err.message);
       }
