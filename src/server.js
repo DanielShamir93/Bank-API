@@ -2,14 +2,19 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const usersRoutes = require("./routes/users/users-routes");
+const path = require("path");
 require("./db/mongoose");
 
 const PORT = process.env.PORT || 5000;
 
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-app.use("/users", usersRoutes);
+const publicPath = path.join(__dirname, "client/build");
 
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(publicPath));
+
+app.use("/users", usersRoutes);
 // 404
 app.all("/*", (req, res) => {
   res.status(404).send("Page not found.");
